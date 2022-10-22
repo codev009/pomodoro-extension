@@ -4,6 +4,15 @@ chrome.alarms.create("pomodoroTimer", {
 
 chrome.alarms.onAlarm.addEventListener((alarm) => {
   if (alarm.name === "pomodoroTimer") {
+    chrome.storage.local.get(["timer", "isRunning"], (res) => {
+      if (res.isRunning) {
+        let timer = res.timer + 1;
+        console.log(timer);
+        chrome.storage.local.set({
+          timer,
+        });
+      }
+    });
   }
 });
 
