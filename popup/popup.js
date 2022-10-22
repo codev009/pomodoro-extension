@@ -9,6 +9,7 @@ function renderTask(taskNum) {
   const text = document.createElement("input");
   text.type = "text";
   text.placeholder = "Enter a task...";
+  text.value = tasks[taskNum];
   text.addEventListener("change", () => {
     tasks[taskNum] = text.value;
   });
@@ -17,7 +18,7 @@ function renderTask(taskNum) {
   deleteBtn.type = "button";
   deleteBtn.value = "X";
   deleteBtn.addEventListener("click", () => {
-    tasks.splice(taskNum, 1);
+    deleteTask(taskNum);
   });
 
   taskRow.appendChild(text);
@@ -31,4 +32,17 @@ function addTask() {
   const taskNum = tasks.length;
   tasks.push("");
   renderTask(taskNum);
+}
+
+function deleteTask(taskNum) {
+  tasks.splice(taskNum, 1);
+  renderTasks();
+}
+
+function renderTasks() {
+  const taskContainer = document.getElementById("task-container");
+  taskContainer.textContent = "";
+  tasks.forEach((taskText, taskNum) => {
+    renderTask(taskNum);
+  });
 }
