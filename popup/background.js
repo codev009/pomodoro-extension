@@ -2,7 +2,7 @@ chrome.alarms.create("pomodoroTimer", {
   periodInMinutes: 1 / 60,
 });
 
-chrome.alarms.onAlarm.addEventListener((alarm) => {
+chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === "pomodoroTimer") {
     chrome.storage.local.get(["timer", "isRunning"], (res) => {
       if (res.isRunning) {
